@@ -56,7 +56,7 @@ This script can be added as a cron job on Linux systems to automate the update p
 
 2) There is no checking on the script to see if the current IP matches the one that is already listed. The IP is just pushed to Cloudflare regardless. As with (1), this is something that can be done - I just haven't, mostly since I expect that this will not get a large amount of traction.
 
-Lastly: **This script is provided "as-is" - meaning that I take no responsibility if anything goes wrong from you using this.** I do not work for Cloudflare or other software company - I'm just someone who has a keyboard and a bit of coding experience, and needed a DDNS updater for my domain and existing options were broken. I have done my best to write this script in a way that I am comfortable using it myself, but you can never predict every possible situation. 
+Lastly: **This script is provided "as-is" - meaning that I take no responsibility if anything goes wrong from you using this.** I do not work for Cloudflare or any other software company - I'm just someone who has a keyboard and a bit of coding experience, and needed a DDNS updater for my domain and existing options were broken. I have done my best to write this script in a way that I am comfortable using it myself, but you can never predict every possible situation. 
 
 As such - read and understand the script before running code a random stranger wrote on your computer. I've done my best to comment it to explain my thought process, and the actual work is done in less than 10 lines.
 
