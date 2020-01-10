@@ -16,10 +16,11 @@ The credentials used to access Cloudflare's API are read from the JSON formatted
 ## Dependencies
 
 This script depends on
-* Python3
-** Package: json
-** Package: sys
-** Package: requests
+
+  * Python3
+  * Package: json
+  * Package: sys
+  * Package: requests
 
 At least as of the version of Python3 that was installed when using `apt-get install python3` on `Debian Buster`, these packages were installed as part of the standard installation.
 
