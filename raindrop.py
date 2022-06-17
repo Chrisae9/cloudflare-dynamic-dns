@@ -35,20 +35,21 @@ headers = {"X-Auth-Key":params['key'],"X-Auth-Email":params["email"],"Content-Ty
 myip = requests.get('https://api.ipify.org').text
 print("Updating Cloudflare DDNS with IP: {0}".format(myip)) # Just printing the log message in case something goes wrong. This will show what IP it tried to update with.
 
+for domain in params['domains']:
 # Now get the id of the record we want to update. We need this ID to actually update the record, and there doesn't seem to be an easy way to get it manually (I.E from the cloudflare site)
 # Reference: https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
 # We assume that the record already exists. We could add a "check if exists, update if it does, create it if it doesn't" check down the road.
-args = {"type":"A","name":params['domain']}
-r = requests.get("https://api.cloudflare.com/client/v4/zones/{0}/dns_records".format(params['zone']), headers=headers, params=args)
-recordid = r.json()['result'][0]['id']
+    args = {"type":"A","name":domain['name']}
+    r = requests.get("https://api.cloudflare.com/client/v4/zones/{0}/dns_records".format(params['zone']), headers=headers, params=args)
+    recordid = r.json()['result'][0]['id']
 
-# Now send our IP to cloudflare to update the IP.
-# Reference: https://api.cloudflare.com/#dns-records-for-a-zone-update-dns-record
-# Note - we do no checking on this end to see if the IP we want to update to is the same as what's already there.
-# The assumption is that this script runs infrequently - every 10+ minutes at most - so this isn't an issue and cloudflare hopefully does some checking on their end.
-# It would also be possible to add a check here that simply checks to see if the already set IP matches the one we want to update to, and only send if they don't match.
-print("Updating DNS record")
-args = {"type":"A","name":params['domain'],"content":myip,"ttl":1} # We use the default TTL value of 1 as specified in the cloudflare API for "auto".
-p = requests.put("https://api.cloudflare.com/client/v4/zones/{0}/dns_records/{1}".format(params['zone'],recordid),headers=headers, data=json.dumps(args))
-print("Got response")
-print(p)
+    # Now send our IP to cloudflare to update the IP.
+    # Reference: https://api.cloudflare.com/#dns-records-for-a-zone-update-dns-record
+    # Note - we do no checking on this end to see if the IP we want to update to is the same as what's already there.
+    # The assumption is that this script runs infrequently - every 10+ minutes at most - so this isn't an issue and cloudflare hopefully does some checking on their end.
+    # It would also be possible to add a check here that simply checks to see if the already set IP matches the one we want to update to, and only send if they don't match.
+    print(f"Updating DNS record for {domain}")
+    args = {"type":"A","name":domain['name'],"content":myip,"ttl":1,'proxied':domain['proxied']} # We use the default TTL value of 1 as specified in the cloudflare API for "auto".
+    p = requests.put("https://api.cloudflare.com/client/v4/zones/{0}/dns_records/{1}".format(params['zone'],recordid),headers=headers, data=json.dumps(args))
+    print("Got response")
+    print(p)

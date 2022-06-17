@@ -31,7 +31,7 @@ The `example_credentials.json` file is a simple JSON formatted file. There are f
 * `zone`: This is the "Zone ID" that you'll see when you log in to Cloudflare and go to the domain you want DDNS for.
 * `email`: This is your email address that you use to log in to cloudflare
 * `key`: This is your API key to Cloudflare. Again, this is obtainable by logging in to your account and either going to "Get API Key" or your user settings page.
-* `domain`: This is the full domain that you want to update the IP for when the script runs. For example, if you wanted to update the record for `subdomain` under `mycoolsite.tld`, your `domain` would be `subdomain.mycoolsite.tld`.
+* `domains`: This is the list of domains that you want to update the IP for when the script runs. For example, if you wanted to update the record for `subdomain` under `mycoolsite.tld`, your `domain` would be `subdomain.mycoolsite.tld`.
 
 These parameters are all things required by the Cloudflare API. You can view their API [here](https://api.cloudflare.com/#dns-records-for-a-zone-properties) to see their definitions and an example for each parameter if you're unclear. The documentation for each API call used in this script are also available.
 
@@ -61,3 +61,13 @@ Lastly: **This script is provided "as-is" - meaning that I take no responsibilit
 As such - read and understand the script before running code a random stranger wrote on your computer. I've done my best to comment it to explain my thought process, and the actual work is done in less than 10 lines.
 
 If you do find a bug, or see something you'd like to see updated, I happily accept pull requests.
+
+### API Key
+
+This is your GLOBAL API key, not a token.
+### Zone ID is in this JSON
+
+curl -X GET "https://api.cloudflare.com/client/v4/zones" \
+-H "X-Auth-Email: myemail@email.com" \
+-H "X-Auth-Key: f34349jf9348jf934jf43345234" \
+-H "Content-Type: application/json"
