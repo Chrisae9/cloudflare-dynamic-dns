@@ -1,3 +1,2 @@
 #!/bin/bash
-
-/usr/bin/python3 /hdd/www/cloudflare-dynamic-dns/raindrop.py /hdd/www/cloudflare-dynamic-dns/credentials.json
+/usr/bin/python3 /home/chis/www/cloudflare-dynamic-dns/raindrop.py /home/chis/www/cloudflare-dynamic-dns/credentials.json
