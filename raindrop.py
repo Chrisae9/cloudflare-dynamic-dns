@@ -41,6 +41,7 @@ for domain in params['domains']:
 # We assume that the record already exists. We could add a "check if exists, update if it does, create it if it doesn't" check down the road.
     args = {"type":"A","name":domain['name']}
     r = requests.get("https://api.cloudflare.com/client/v4/zones/{0}/dns_records".format(params['zone']), headers=headers, params=args)
+    # print(r.json())
     recordid = r.json()['result'][0]['id']
 
     # Now send our IP to cloudflare to update the IP.
